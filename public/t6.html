@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Task 6</title>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Fira+Sans"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/vendor/bootstrap/css/bootstrap.css"
+    />
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <style>
+      .house-diagram {
+        display: flex;
+        flex-wrap: wrap; /* arrange in a grid if it overflows (it will) */
+      }
+
+      .room-square-container {
+        width: 50%;
+        padding: 1em;
+      }
+
+      .room-square {
+        background-color: #f0f0f0;
+        border: 1px solid #e0e0e0;
+        border-radius: 6px;
+        text-align: center;
+        padding: 100px 0;
+        font-size: 2em;
+
+        &.lit {
+          background-color: #ffcc00;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .room-square-container {
+          width: 100%;
+        }
+      }
+
+      #voice-command.listening {
+        background-color: #f44336;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="task-container">
+      <div class="task-header">
+        <div>
+          <h1>Task 6</h1>
+        </div>
+        <div>
+          <a href="/" class="btn btn-light">Back</a>
+        </div>
+      </div>
+
+      <h2>Voice assistant</h2>
+      <button class="btn btn-primary" id="voice-command">
+        Listen for voice command
+      </button>
+
+      <div class="house-diagram">
+        <div class="room-square-container">
+          <div class="room-square lit" id="bedroom-square">Bedroom</div>
+        </div>
+        <div class="room-square-container">
+          <div class="room-square" id="bathroom-square">Bathroom</div>
+        </div>
+        <div class="room-square-container">
+          <div class="room-square lit" id="kitchen-square">Kitchen</div>
+        </div>
+        <div class="room-square-container">
+          <div class="room-square" id="living-room-square">Living room</div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+
+      const voiceCommand = document.getElementById("voice-command");
+      voiceCommand.onclick = () => {
+        // You should also remove this class once the recognizer is done listening.
+        voiceCommand.classList.add("listening");
+
+        // Your solution here:
+      };
+
+      // Feel free to add any other JavaScript you need.
+    </script>
+  </body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Task 7</title>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Fira+Sans"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/vendor/bootstrap/css/bootstrap.css"
+    />
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <style type="text/css">
+      .card {
+        margin: 0 auto;
+      }
+
+      .profile-name-input {
+        margin-bottom: 16px;
+      }
+
+      .profile-card {
+        max-width: 400px;
+      }
+
+      .profile-pic {
+        width: 100px;
+        height: 100px;
+        border-radius: 6px;
+        margin: 12px auto;
+        display: block;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="task-container">
+      <div class="task-header">
+        <div>
+          <h1>Task 7</h1>
+        </div>
+        <div>
+          <a href="/" class="btn btn-light">Back</a>
+        </div>
+      </div>
+      <div class="card profile-card">
+        <div class="card-body">
+          <h5 class="card-title">My profile</h5>
+          <input
+            id="name-input"
+            type="text"
+            class="form-control profile-name-input"
+            value="User"
+            placeholder="Name"
+            aria-label="Name"
+          />
+          <div
+            role="button"
+            tabindex="0"
+            data-bs-toggle="modal"
+            data-bs-target="#profilePicModal"
+          >
+            <img class="profile-pic" src="/images/profile.svg" />
+          </div>
+          <p class="card-text">
+            Click the picture above to change your profile picture!
+          </p>
+        </div>
+      </div>
+
+      <!-- This is where the popup modal lives. It won't render until the profile pic is clicked. -->
+      <div
+        class="modal fade"
+        id="profilePicModal"
+        tabindex="-1"
+        aria-labelledby="profilePicModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="profilePicModalLabel">
+                Change profile pic
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <label for="profile-pic-file" class="form-label">
+                Choose a new profile pic
+              </label>
+
+              <!-- Add a file uploader component here! -->
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      // You can use this function to close the Bootstrap modal.
+      const closeModal = () => {
+        const modal = document.getElementById("profilePicModal");
+        const modalInstance = bootstrap.Modal.getInstance(modal);
+        modalInstance.hide();
+      };
+
+      // This function takes a data URL and resizes it down so it can be stored in localStorage.
+      // Loading the image isn't instant, so the function returns a *Promise*.
+      // You can use .then() to specify code that should run after the image is resized:
+      // resizeAndCropPic(dataUrl).then((croppedDataUrl) => {
+      //   // do something with croppedDataUrl
+      // });
+      // (or use async/await!)
+      const resizeAndCropPic = (dataUrl) => {
+        // crop to the center and resize to 512x512
+        return new Promise((resolve) => {
+          const canvas = document.createElement("canvas");
+          [canvas.width, canvas.height] = [512, 512];
+          const ctx = canvas.getContext("2d");
+
+          const img = new Image();
+          img.src = dataUrl;
+          img.onload = () => {
+            const [width, height] = [img.width, img.height];
+            const [shorter, longer] =
+              width < height ? [width, height] : [height, width];
+            const [x, y] =
+              width < height
+                ? [0, (height - width) / 2]
+                : [(width - height) / 2, 0];
+            ctx.drawImage(img, x, y, shorter, shorter, 0, 0, 512, 512);
+            const croppedDataUrl = canvas.toDataURL("image/jpeg");
+
+            resolve(croppedDataUrl);
+          };
+        });
+      };
+
+      // Your solution here:
+    </script>
+  </body>
+</html>
