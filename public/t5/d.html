@@ -2,7 +2,7 @@
 
 <html>
   <head>
-    <title></title>
+    <title>Task 5d</title>
 
     <link
       href="https://fonts.googleapis.com/css?family=Fira+Sans"
@@ -30,6 +30,9 @@
 
         display: flex;
         /* You may add additional code here, if you need. */
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
       }
 
       /* Keep this code; the circles in the design are meant to be this size, shape, and color. */
@@ -41,17 +44,44 @@
       }
 
       /* Add whatever CSS you need below to reference the elements you create in your HTML. */
+      .top-row, .bottom-row {
+        width: 100%;
+        display: flex;
+        align-items: center; /* Center vertically */
+      }
+
+      .top-row {
+        flex: 1;
+        justify-content: center;
+      }
+
+      .bottom-row {
+        flex-direction: column; /* Align circles vertically */
+        justify-content: space-around;
+        flex: 2;
+      }
+
+      .bottom-row .circle {
+        margin: 10px 0; /* Add space between circles vertically */
+      }
     </style>
   </head>
   <body>
     <main>
       <!-- Add the appropriate <div> elements here. -->
-      <div class="circle"></div>
-      <div class="circle"></div>
-      <div class="circle"></div>
-      <div class="circle"></div>
-      <div class="circle"></div>
-      <div class="circle"></div>
+      <!-- Top Row -->
+      <div class="top-row" style="background-color: #d20000;">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+      </div>
+
+      <!-- Bottom Row -->
+      <div class="bottom-row" style="background-color: #22aad2;">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+      </div>
     </main>
   </body>
 </html>

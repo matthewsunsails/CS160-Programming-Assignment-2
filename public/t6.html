@@ -88,15 +88,65 @@
       const SpeechRecognition =
         window.SpeechRecognition || window.webkitSpeechRecognition;
 
+      const recognition = new SpeechRecognition();
+      recognition.lang = "en-US";
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
       const voiceCommand = document.getElementById("voice-command");
       voiceCommand.onclick = () => {
         // You should also remove this class once the recognizer is done listening.
         voiceCommand.classList.add("listening");
 
-        // Your solution here:
+        recognition.start();
       };
 
-      // Feel free to add any other JavaScript you need.
+      recognition.onresult = (event) => {
+        const command = event.results[0][0].transcript.toLowerCase();
+        let roomToggled = false;
+
+        if (command.includes("bathroom")) {
+          document.getElementById("bathroom-square").classList.toggle("lit");
+          roomToggled = true;
+        }
+        if (command.includes("bedroom")) {
+          document.getElementById("bedroom-square").classList.toggle("lit");
+          roomToggled = true;
+        }
+        if (command.includes("kitchen")) {
+          document.getElementById("kitchen-square").classList.toggle("lit");
+          roomToggled = true;
+        }
+        if (command.includes("living room")) {
+          document.getElementById("living-room-square").classList.toggle("lit");
+          roomToggled = true;
+        }
+
+        if (roomToggled) {
+          speak(`I've just toggled the light.`);
+        } else {
+          speak(`Sorry, I didn't understand.`);
+        }
+
+        voiceCommand.classList.remove("listening");
+      };
+
+      recognition.onerror = (event) => {
+        console.error("Speech recognition error detected: " + event.error);
+        voiceCommand.classList.remove("listening");
+      };
+
+      function speak(message) {
+        const speech = new SpeechSynthesisUtterance();
+        speech.lang = "en-US";
+        speech.text = message;
+        speech.volume = 1;
+        speech.rate = 1;
+        speech.pitch = 1;
+
+        speechSynthesis.speak(speech);
+      }
     </script>
   </body>
 </html>

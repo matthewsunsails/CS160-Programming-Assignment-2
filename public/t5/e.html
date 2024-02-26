@@ -2,7 +2,7 @@
 
 <html>
   <head>
-    <title></title>
+    <title>Task 5e</title>
 
     <link
       href="https://fonts.googleapis.com/css?family=Fira+Sans"
@@ -32,12 +32,30 @@
         /* You may add additional code here, if you need. */
       }
 
-      /* Add whatever CSS you need below to reference the elements you create in your HTML. */
+      @media (orientation: portrait) {
+        main {
+          flex-direction: column;
+        }
+      }
+
+      @media (orientation: landscape) {
+        main {
+          flex-direction: row;
+        }
+      }
+      
+      div {
+        flex: 1;
+      }
     </style>
   </head>
   <body>
     <main>
       <!-- Add the appropriate <div> elements here. -->
+      <div style="background-color: #d20000;"></div>
+      <div style="background-color: #22aad2;"></div>
+      <div style="background-color: #117711;"></div>
+      <div style="background-color: #d2a900;"></div>
     </main>
   </body>
 </html>

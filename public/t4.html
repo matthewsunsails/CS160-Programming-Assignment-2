@@ -2,7 +2,7 @@
 
 <html>
   <head>
-    <title></title>
+    <title>Task 4</title>
 
     <link
       href="https://fonts.googleapis.com/css?family=Fira+Sans"
@@ -13,6 +13,25 @@
       type="text/css"
       href="/vendor/bootstrap/css/bootstrap.css"
     />
+    <style>
+      th, td {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 25px;
+        padding-right: 25px;
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      
+      table {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+
+      table tr:nth-child(odd) td{
+        background-color: #ffffff;
+      }
+    </style>
     <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/main.css" />
 
@@ -25,15 +44,90 @@
           <h1>Task 4</h1>
         </div>
         <div>
+          <a href="/t4" class="btn btn-light">Refresh</a>
+        </div>
+        <div>
           <a href="/" class="btn btn-light">Back</a>
         </div>
-
-        <!-- Your weather forecast here! -->
       </div>
+      
+      <div id="weather-info"></div>
     </div>
 
     <script type="text/javascript">
       // Your solution here:
+      document.addEventListener("DOMContentLoaded", function () {
+        // Default coordinates (Metropolitan Museum of Art in New York City)
+        let defaultCoords = [40.779, -73.963];
+
+        // Function to fetch weather data
+        async function getWeather(latitude, longitude) {
+          const apiKey = "c2471cd5c2d885802c62b3e645613e7d";
+          const apiUrl = `http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
+
+          try {
+            const response = await fetch(apiUrl);
+            const data = await response.json();
+            console.log(response);
+            console.log(data);
+            displayWeather(data);
+          } catch (error) {
+            console.error("Error fetching weather data:", error);
+          }
+        }
+
+        // Function to display weather information
+        function displayWeather(data) {
+          const weatherInfoContainer = document.getElementById("weather-info");
+
+          // Display current time and location's coordinates
+          const currentTime = new Date().toLocaleTimeString();
+          const currentCoords = `[${data.city.coord.lat}, ${data.city.coord.lon}]`;
+          const locationInfo = `<p>Time at Request: ${currentTime}</p><p>Location Coordinates: ${currentCoords}</p>`;
+
+          // Display hourly forecast
+          let hourlyForecast = "<h3>24-Hour Forecast:</h3>";
+          const hourlyData = data.list.slice(0, 8); // Display the first 8 steps
+
+          hourlyData.forEach(hour => {
+            const time = new Date(hour.dt * 1000).toLocaleTimeString([], {hour: "2-digit", minute: "2-digit"});
+            const weather = hour.weather[0].description;
+            const temp = Math.round(((hour.main.temp - 273.15) * 1.8 + 32) * 10) / 10;
+            const windSpeed = hour.wind.speed;
+
+            hourlyForecast += `<tr><td>${time}</td><td>${weather}</td><td>${temp}°F</td><td>${windSpeed} m/s</td>`;
+          });
+
+          // Combine and display information
+          weatherInfoContainer.innerHTML = locationInfo
+            + '<table><tr bgcolor="#aaaaaa"><th>Time</th><th>Weather</th><th>Temperature</th><th>Wind Speed</th></tr>'
+            + hourlyForecast
+            + '</table>';
+        }
+
+        // Function to handle Geolocation API
+        function getLocation() {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+              position => {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+                getWeather(latitude, longitude);
+              },
+              error => {
+                console.error("Error getting location:", error);
+                getWeather(...defaultCoords);
+              }
+            );
+          } else {
+            console.error("Geolocation is not supported by this browser.");
+            getWeather(...defaultCoords);
+          }
+        }
+
+        // Initiate the process
+        getLocation();
+      });
     </script>
   </body>
 </html>

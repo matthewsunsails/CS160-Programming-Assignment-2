@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Task 3</title>
+    <title>Task 3 - Page 1</title>
 
     <link
       href="https://fonts.googleapis.com/css?family=Fira+Sans"
@@ -22,17 +22,24 @@
     <div class="container">
       <div class="task-header">
         <div>
-          <h1>Task 3</h1>
+          <h1>Task 3 - Page 1</h1>
         </div>
         <div>
           <a href="/" class="btn btn-light">Back</a>
         </div>
       </div>
 
-      <ul class="list-group">
-        <!-- The link <a> below should go to your first view -->
-        <li class="list-group-item"><a href="/t3/1">Start here</a></li>
-      </ul>
+      <div>
+        <a href="/t3/2">
+          <img src="../images/01.png" alt="duo splash" class="center" id="next-page-image">
+        </a>
+      </div>
     </div>
+
+    <script>
+      document.getElementById('next-page-image').addEventListener('click', function() {
+        window.location.href = '/t3/2';
+      });
+    </script>
   </body>
 </html>

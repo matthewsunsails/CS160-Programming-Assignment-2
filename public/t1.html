@@ -82,6 +82,35 @@
       resetButton.addEventListener("click", resetAllBubbles);
 
       // Your solution here:
+      const bubbles = document.querySelectorAll(".p2-circle");
+
+      bubbles.forEach(bubble => {
+        bubble.addEventListener("click", () => {
+          if (bubble.classList.contains("bg-purple")) {
+            // Clicking on a purple bubble hides all purple bubbles
+            const purpleBubbles = document.querySelectorAll(".bg-purple");
+            purpleBubbles.forEach(purpleBubble => {
+              purpleBubble.style.display = "none";
+            });
+          } else if (bubble.classList.contains("bg-green")) {
+            // Clicking on a green bubble hides all green and blue bubbles
+            const greenAndBlueBubbles = document.querySelectorAll(".bg-green, .bg-blue");
+            greenAndBlueBubbles.forEach(greenOrBlueBubble => {
+              greenOrBlueBubble.style.display = "none";
+            });
+          } else if (bubble.classList.contains("bg-orange") && bubble.classList.contains("p2-border")) {
+            // Clicking on an orange bordered bubble hides just that clicked bubble
+            bubble.style.display = "none";
+          }
+        });
+
+        bubble.addEventListener("mouseover", () => {
+          if (bubble.id === "gradient-circle") {
+            // Hovering over the gradient bubble hides the gradient bubble
+            bubble.style.display = "none";
+          }
+        });
+      });
     </script>
   </body>
 </html>

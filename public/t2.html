@@ -41,7 +41,35 @@
     </div>
 
     <script type="text/javascript">
-      // Your solution here:
+      document.addEventListener("DOMContentLoaded", function() {
+        const stopButton = document.getElementById("stop-button");
+        const shapeContainer = document.querySelector(".shape-container");
+        let adder;
+
+        // Function to add a new bubble
+        function addBubble() {
+          const bubble = document.createElement("div");
+          bubble.classList.add("p2-circle");
+          const colors = ["bg-red", "bg-orange", "bg-yellow", "bg-green", "bg-blue", "bg-purple"];
+          const randomColor = colors[Math.floor(Math.random() * colors.length)];
+          bubble.classList.add(randomColor);
+
+          // Event listener to hide the bubble when clicked
+          bubble.addEventListener("click", function() {
+            bubble.style.display = "none";
+          });
+
+          shapeContainer.appendChild(bubble);
+        }
+
+        // Start adding bubbles at interval of 1000mx
+        adder = setInterval(addBubble, 1000);
+
+        // Event listener to stop adding bubbles
+        stopButton.addEventListener("click", function() {
+          clearInterval(adder);
+        });
+      });
     </script>
   </body>
 </html>

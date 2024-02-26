@@ -81,6 +81,14 @@ app.get("/t3", (request, response) => {
   response.status(200).sendFile("public/t3.html", { root: __dirname });
 });
 
+for (const subpage of ["1", "2", "3", "4", "5"]) {
+  app.get(`/t3/${subpage}`, (request, response) => {
+    response
+      .status(200)
+      .sendFile(`public/t3/${subpage}.html`, { root: __dirname });
+  });
+}
+
 app.get("/t4", (request, response) => {
   response.status(200).sendFile("public/t4.html", { root: __dirname });
 });

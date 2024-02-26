@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Task 3 - Page 5</title>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Fira+Sans"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/vendor/bootstrap/css/bootstrap.css"
+    />
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="task-header">
+        <div>
+          <h1>Task 3 - Page 5</h1>
+        </div>
+      </div>
+    
+      <div class="image-container center">
+        <div class="clickable-area top" id="top-click-area"></div>
+        <div class="clickable-area bottom" id="bottom-click-area"></div>
+        <img src="../images/05.png" alt="duo health" class="center" id="next-page-image">
+      </div>
+    </div>
+
+    <script>
+      // Get references to the clickable areas
+      var topClickArea = document.getElementById('top-click-area');
+      var bottomClickArea = document.getElementById('bottom-click-area');
+
+      // Get reference to the image
+      var image = document.getElementById('next-page-image');
+
+      // Calculate the height of the image
+      var imageHeight = image.offsetHeight;
+
+      // Add click event listeners to the clickable areas
+      topClickArea.addEventListener('click', function(event) {
+        // Redirect to /t3/3
+        window.location.href = '/t3/2';
+      });
+
+      bottomClickArea.addEventListener('click', function(event) {
+        // Redirect to /t3/5
+        window.location.href = '/t3/4';
+      });
+    </script>
+  </body>
+</html>

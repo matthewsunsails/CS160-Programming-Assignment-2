@@ -2,7 +2,7 @@
 
 <html>
   <head>
-    <title></title>
+    <title>Task 5c</title>
 
     <link
       href="https://fonts.googleapis.com/css?family=Fira+Sans"
@@ -22,6 +22,7 @@
       body {
         margin: 0;
         padding: 0;
+        overflow: hidden;
       }
 
       main {
@@ -30,14 +31,36 @@
 
         display: flex;
         /* You may add additional code here, if you need. */
+        flex-direction: column;
       }
 
-      /* Add whatever CSS you need below to reference the elements you create in your HTML. */
+      .t5-row {
+        display: flex;
+        flex: 1;
+      }
+
+      .t5-row div {
+        flex: 1;
+      }
+
+      .t5-row:first-child {
+        flex: 2;
+      }
     </style>
   </head>
   <body>
     <main>
-      <!-- Add the appropriate <div> elements here. -->
+      <!-- First Row -->
+      <div class="t5-row">
+        <div style="background-color: #d20000;"></div>
+        <div style="background-color: #22aad2;"></div>
+      </div>
+
+      <!-- Second Row -->
+      <div class="t5-row">
+        <div style="background-color: #117711;"></div>
+        <div style="background-color: #d2a900;"></div>
+      </div>
     </main>
   </body>
 </html>
